@@ -97,8 +97,7 @@ export default class Optionfour {
 
   render() {
     this.wrapper = document.createElement("div");
-    this.wrapper.classList.add("optionfour");
-
+    
     if(this.readOnly == true){
 
       if(this.config.showAnswer == false){
@@ -275,15 +274,18 @@ export default class Optionfour {
       
 
       input.addEventListener("click", () => {
+        
         if(input.checked==true){
           this.data.selected = item.type;
           console.log(this.data.selected);
           this.wrapper.innerHTML='';
+          this.config.getIndexOption(this.data.selected,this.api.blocks.getCurrentBlockIndex());
           this.createOption();
         }else{
           this.data.selected = '';
         console.log(this.data.selected);
         this.wrapper.innerHTML='';
+        this.config.getIndexOption(this.data.selected,this.api.blocks.getCurrentBlockIndex());
         this.createOption();
         }
         
@@ -297,6 +299,8 @@ export default class Optionfour {
   }
 
   createWrapper() {
+    this.wrapper.classList.add("optionfour");
+
     this.options.map((item) => {
       let input = document.createElement("input");
       input.id = item.type;

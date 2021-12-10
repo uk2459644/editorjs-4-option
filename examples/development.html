@@ -98,6 +98,10 @@
     <pre id="output"></pre>
 
     <script>
+      const showAlert=(option,blockindex)=>{
+        alert('Hey Hello '+option+' and block index is '+blockindex);
+      }
+
       const editor = new EditorJS({
         holder: 'editorjs',
         readOnly:false,
@@ -106,6 +110,7 @@
             class: Optionfour,
             config:{
               showAnswer:false,
+              getIndexOption:showAlert,
             }
           },
         },
@@ -116,6 +121,7 @@
       const saveButton = document.getElementById('save-button');
       const output = document.getElementById('output');
 
+     
       saveButton.addEventListener('click', () => {
         editor.save().then((savedData) => {
           output.innerText = JSON.stringify(savedData, null, 4);

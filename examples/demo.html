@@ -98,6 +98,10 @@
     <pre id="output"></pre>
 
     <script>
+      const showAlert=(option,blockindex)=>{
+        alert('Hey Hello '+option+' and block index is '+blockindex);
+      }
+
       const editor = new EditorJS({
         holder: 'editorjs',
         readOnly:true,
@@ -107,7 +111,8 @@
             class: Optionfour,
             /* to display inline tools, enable `inlineToolbar` option */
            config:{
-             showAnswer:true
+             showAnswer:false,
+             getIndexOption:showAlert,
            }
           },
         },
@@ -119,7 +124,7 @@
                   "type": "optionfour",
                   "data": {
                       "option": "a",
-                      "selected": "a",
+                      "selected": " ",
                       "a_text": "https://firebasestorage.googleapis.com/v0/b/open-academy-63ad7.appspot.com/o/images%2Fphysics-photos%2FiiYpl3X6WMWeoMuAMxomclNPv8h1%2Fchemistry.png?alt=media&token=7e79a303-8948-4f3a-836e-dabc03a8e535",
                       "b_text": "this is option b",
                       "c_text": "this is option c",
