@@ -9,7 +9,7 @@ import ChangeIcon from "../asset/change.svg";
 import AlphaUp from "../asset/alphaUp.svg";
 import AlphaDown from "../asset/alphaDown.svg";
 
-const katex=require('katex');
+const katex = require("katex");
 
 export default class Optionfour {
   static get toolbox() {
@@ -42,13 +42,13 @@ export default class Optionfour {
       d_text: data.d_text || "",
       withBorder: data.withBorder !== undefined ? data.withBorder : false,
       withBackground:
-      data.withBackground !== undefined ? data.withBackground : false,
+        data.withBackground !== undefined ? data.withBackground : false,
       stretched: data.stretched !== undefined ? data.stretched : false,
       image: data.image !== undefined ? data.image : false,
       math: data.math !== undefined ? data.math : false,
     };
     this.wrapper = undefined;
-    this.katex=katex;
+    this.katex = katex;
     this.options = [
       {
         type: "a",
@@ -97,204 +97,198 @@ export default class Optionfour {
 
   render() {
     this.wrapper = document.createElement("div");
-    
-    if(this.readOnly == true){
 
-      if(this.config.showAnswer == false){
+    if (this.readOnly == true) {
+      if (this.config.showAnswer == false) {
         this.createOption();
       }
-      if(this.config.showAnswer ==true){
-       this.showAnswer();
-       
+      if (this.config.showAnswer == true) {
+        this.showAnswer();
+
         // alert.appendChild(comment);
         // this.wrapper.appendChild(alert);
-
       }
-
-     
-
-    }else{
+    } else {
       this.createWrapper();
     }
 
     return this.wrapper;
   }
 
-  showAnswer(){
+  showAnswer() {
     let form = document.createElement("form");
 
-    let alert=document.createElement('div');
-        alert.classList.add('alert');
-     let comment=document.createElement('p');
-        if(this.data.selected==this.data.option){
-          comment.classList.add('alert-success');
-          comment.title="Correct";
-          comment.innerText="Correct option is \""+this.data.option+"\". \n Your option is \""+this.data.selected+"\".";
-        }else{
-          comment.classList.add('alert-danger');
-          comment.title="Incorrect!";
-          comment.innerText="Correct option is \""+this.data.option+"\".";
-        }
-    
+    let alert = document.createElement("div");
+    alert.classList.add("alert");
+    let comment = document.createElement("p");
+    if (this.data.selected == this.data.option) {
+      comment.classList.add("alert-success");
+      comment.title = "Correct";
+      comment.innerText =
+        'Correct option is "' +
+        this.data.option +
+        '". \n Your option is "' +
+        this.data.selected +
+        '".';
+    } else {
+      comment.classList.add("alert-danger");
+      comment.title = "Incorrect!";
+      comment.innerText = 'Correct option is "' + this.data.option + '".';
+    }
+
     this.options.forEach((item) => {
-      let div=document.createElement('div');
-      div.classList.add('checkboxWithcontent');
-      
-      
-     // text.innerHTML='This is demonstration text, can it will be long enough for a line.this is amazing it going longer and longer..';
+      let div = document.createElement("div");
+      div.classList.add("checkboxWithcontent");
+
+      // text.innerHTML='This is demonstration text, can it will be long enough for a line.this is amazing it going longer and longer..';
       let input = document.createElement("input");
 
       input.setAttribute("type", "checkbox");
       input.setAttribute("name", item.type);
       //input.checked = true;
       input.id = item.type;
-      input.disabled=true;
-     
+      input.disabled = true;
+
       let string;
 
-      switch(item.type){
-        case 'a':
-          string=this.data.a_text;
+      switch (item.type) {
+        case "a":
+          string = this.data.a_text;
           break;
-        case 'b':
-          string=this.data.b_text;
+        case "b":
+          string = this.data.b_text;
           break;
-        case 'c':
-          string=this.data.c_text;
+        case "c":
+          string = this.data.c_text;
           break;
-        case 'd':
-          string=this.data.d_text;
+        case "d":
+          string = this.data.d_text;
           break;
         default:
-          string='Example text';
+          string = "Example text";
           break;
       }
 
       let text;
-      if(string.trim().includes("https://")){
-         // make image part
-         text=document.createElement('img');
-         text.src=string.trim();
-      } else{
-        text=document.createElement('p');
-        if(string.trim().includes(" ")){
+      if (string.trim().includes("https://")) {
+        // make image part
+        text = document.createElement("img");
+        text.src = string.trim();
+      } else {
+        text = document.createElement("p");
+        if (string.trim().includes(" ")) {
           // make string part
-          text.innerHTML=string;
-        }else{
+          text.innerHTML = string;
+        } else {
           //make math part
-          this.katex.render(string,text,{
-            throwOnError:false
-        });
+          this.katex.render(string, text, {
+            throwOnError: false,
+          });
         }
       }
 
-      
-
-      if(this.data.selected==item.type){
-          input.checked=true;
+      if (this.data.selected == item.type) {
+        input.checked = true;
       }
       div.appendChild(input);
       div.appendChild(text);
       form.appendChild(div);
-      
-
-     
-     
     });
     alert.appendChild(comment);
     form.appendChild(alert);
-    this.wrapper.classList.remove('optionfour');
-    this.wrapper.classList.add('checkbox');
+    this.wrapper.classList.remove("optionfour");
+    this.wrapper.classList.add("checkbox");
     this.wrapper.appendChild(form);
-
   }
 
   createOption() {
     let form = document.createElement("form");
-    
+
     this.options.forEach((item) => {
-      let div=document.createElement('div');
-      div.classList.add('checkboxWithcontent');
-      
-      
-     // text.innerHTML='This is demonstration text, can it will be long enough for a line.this is amazing it going longer and longer..';
+      let div = document.createElement("div");
+      div.classList.add("checkboxWithcontent");
+
+      // text.innerHTML='This is demonstration text, can it will be long enough for a line.this is amazing it going longer and longer..';
       let input = document.createElement("input");
 
       input.setAttribute("type", "checkbox");
       input.setAttribute("name", item.type);
       //input.checked = true;
       input.id = item.type;
-     
+
       let string;
 
-      switch(item.type){
-        case 'a':
-          string=this.data.a_text;
+      switch (item.type) {
+        case "a":
+          string = this.data.a_text;
           break;
-        case 'b':
-          string=this.data.b_text;
+        case "b":
+          string = this.data.b_text;
           break;
-        case 'c':
-          string=this.data.c_text;
+        case "c":
+          string = this.data.c_text;
           break;
-        case 'd':
-          string=this.data.d_text;
+        case "d":
+          string = this.data.d_text;
           break;
         default:
-          string='Example text';
+          string = "Example text";
           break;
       }
 
       let text;
-      if(string.trim().includes("https://")){
-         // make image part
-         text=document.createElement('img');
-         text.src=string.trim();
-      } else{
-        text=document.createElement('p');
-        if(string.trim().includes(" ")){
+      if (string.trim().includes("https://")) {
+        // make image part
+        text = document.createElement("img");
+        text.src = string.trim();
+      } else {
+        text = document.createElement("p");
+        if (string.trim().includes(" ")) {
           // make string part
-          text.innerHTML=string;
-        }else{
+          text.innerHTML = string;
+        } else {
           //make math part
-          this.katex.render(string,text,{
-            throwOnError:false
-        });
+          this.katex.render(string, text, {
+            throwOnError: false,
+          });
         }
       }
 
-      
-
-      if(this.data.selected==item.type){
-          input.checked=true;
+      if (this.data.selected == item.type) {
+        input.checked = true;
       }
       div.appendChild(input);
       div.appendChild(text);
       form.appendChild(div);
-      
 
       input.addEventListener("click", () => {
-        
-        if(input.checked==true){
+        console.log(typeof this.config.getIndexOption);
+        if (input.checked == true) {
           this.data.selected = item.type;
           console.log(this.data.selected);
-          this.wrapper.innerHTML='';
-          this.config.getIndexOption(this.data.selected,this.api.blocks.getCurrentBlockIndex());
-          this.createOption();
-        }else{
-          this.data.selected = '';
-        console.log(this.data.selected);
-        this.wrapper.innerHTML='';
-        this.config.getIndexOption(this.data.selected,this.api.blocks.getCurrentBlockIndex());
-        this.createOption();
-        }
-        
-      });
+          this.wrapper.innerHTML = "";
 
-     
+          this.config.getIndexOption(
+            this.data.selected,
+            this.api.blocks.getCurrentBlockIndex(),
+            this.config.questionNumber
+          );
+          this.createOption();
+        } else {
+          this.data.selected = "";
+          console.log(this.data.selected);
+          this.wrapper.innerHTML = "";
+          this.config.getIndexOption(
+            this.data.selected,
+            this.api.blocks.getCurrentBlockIndex(),
+            this.config.questionNumber
+          );
+          this.createOption();
+        }
+      });
     });
-    this.wrapper.classList.remove('optionfour');
-    this.wrapper.classList.add('checkbox');
+    this.wrapper.classList.remove("optionfour");
+    this.wrapper.classList.add("checkbox");
     this.wrapper.appendChild(form);
   }
 
@@ -347,7 +341,7 @@ export default class Optionfour {
         if (tune.name == "change") {
           console.log(this.data);
           this.change = !this.change;
-          this.wrapper.innerHTML='';
+          this.wrapper.innerHTML = "";
 
           if (this.change == true) {
             this.createOption();
@@ -368,10 +362,10 @@ export default class Optionfour {
 
     return wrapper;
   }
-  save(){
+  save() {
     return {
-      ...this.data
-    }
+      ...this.data,
+    };
   }
   _toggleTune(tune) {
     this.data[tune] = !this.data[tune];

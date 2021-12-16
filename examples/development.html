@@ -98,8 +98,8 @@
     <pre id="output"></pre>
 
     <script>
-      const showAlert=(option,blockindex)=>{
-        alert('Hey Hello '+option+' and block index is '+blockindex);
+      const showAlert=(option,blockindex,questionNumber)=>{
+        alert('Hey Hello '+option+' and block index is '+blockindex+' and question number is '+questionNumber);
       }
 
       const editor = new EditorJS({
@@ -110,7 +110,8 @@
             class: Optionfour,
             config:{
               showAnswer:false,
-              getIndexOption:showAlert,
+              questionNumber:1,
+              getIndexOption:showAlert
             }
           },
         },
