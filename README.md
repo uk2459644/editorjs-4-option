@@ -70,5 +70,5 @@ var editorjs=new EditorJS({
       },
       "type": "optionfour"
     }
-    ```
+ ```
     
